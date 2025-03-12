@@ -1,0 +1,50 @@
+
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=500,expireAfterAccess=30m
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  application:
+    name: block-academy
+
+app:
+  jwt:
+    secret: 3d2771822b9b3a8edd1d314f861578957e66480eebb8ee173a0d353587fc3d9b1ce9c99f1c0a4f4652911e17358b17f9c9e41ae6e095c8f3ad9a590c68e0067c
+    expiration: 86400000  # 24 hours in milliseconds
+  file:
+    upload-dir: ./uploads
+
+# Server configuration
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+
+# Logging configuration
+logging:
+  level:
+    org.springframework.web: INFO
+    org.hibernate: INFO
+    com.learn.block_academy: DEBUG
