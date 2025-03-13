@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -23,9 +24,6 @@ public class CourseDto {
     private String instructorName;
     private BigDecimal price;
     private CourseLevel level;
-    private int totalModules;
-    private int totalLessons;
-    private int enrollmentCount;
+    private List<ModuleDto> modules;
     private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 }
