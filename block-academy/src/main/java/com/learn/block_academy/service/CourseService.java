@@ -134,7 +134,6 @@ public class CourseService {
                 .order(moduleRequest.getOrder())
                 .lessons(new ArrayList<>())
                 .build();
-
         Module savedModule = moduleRepository.save(module);
         return mapToModuleDto(savedModule);
     }
@@ -147,7 +146,7 @@ public class CourseService {
                 .level(course.getLevel())
                 .instructorName(course.getInstructor().getFullName())
                 .createdAt(course.getCreatedAt())
-                .updatedAt(course.getUpdatedAt())
+                //.updatedAt(course.getUpdatedAt())
                 .build();
     }
 
