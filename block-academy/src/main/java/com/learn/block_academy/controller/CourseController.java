@@ -5,10 +5,8 @@ import com.learn.block_academy.exception.ResourceNotFoundException;
 import com.learn.block_academy.service.CourseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -43,7 +41,7 @@ public class CourseController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     public ResponseEntity<CourseDto> updateCourse(
             @PathVariable Long id,
             @Valid @RequestBody CourseDto courseRequest) throws ResourceNotFoundException {
@@ -52,14 +50,14 @@ public class CourseController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     public ResponseEntity<Void> deleteCourse(@PathVariable Long id) throws ResourceNotFoundException {
         courseService.deleteCourse(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{courseId}/modules")
-    @PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     public ResponseEntity<ModuleDto> addModule(
             @PathVariable Long courseId,
             @Valid @RequestBody ModuleCreateRequest moduleRequest) throws ResourceNotFoundException {
@@ -68,7 +66,7 @@ public class CourseController {
     }
 
     @PostMapping("/{courseId}/enroll")
-    @PreAuthorize("hasRole('STUDENT')")
+   // @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<EnrollmentDto> enrollInCourse(@PathVariable Long courseId) throws ResourceNotFoundException {
         EnrollmentDto enrollment = courseService.enrollStudent(courseId);
         return ResponseEntity.status(HttpStatus.CREATED).body(enrollment);
