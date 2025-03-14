@@ -1,13 +1,11 @@
 package com.learn.block_academy.controller;
 
 import com.learn.block_academy.dto.FileUploadResponse;
-import com.learn.block_academy.dto.LessonProgressDto;
 import com.learn.block_academy.exception.FileStorageException;
 import com.learn.block_academy.service.FileStorageService;
 import com.learn.block_academy.service.LessonService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -26,6 +24,7 @@ public class ContentController {
 
     private final FileStorageService fileStorageService;
 
+    @Autowired
     public ContentController(FileStorageService fileStorageService, LessonService lessonService) {
         this.fileStorageService = fileStorageService;
     }
