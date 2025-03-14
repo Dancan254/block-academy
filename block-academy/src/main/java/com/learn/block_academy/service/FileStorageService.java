@@ -1,8 +1,8 @@
 package com.learn.block_academy.service;
 
-import com.learn.block_academy.config.FileStorageProperties;
 import com.learn.block_academy.exception.FileStorageException;
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -21,17 +21,15 @@ import java.util.UUID;
 @Service
 public class FileStorageService {
 
-    private final FileStorageProperties fileStorageProperties;
+    @Value("${app.file.upload-dir}")
+    String uploadDir;
     private Path fileStorageLocation;
 
-    // Constructor injection is the recommended approach
-    public FileStorageService(FileStorageProperties fileStorageProperties) {
-        this.fileStorageProperties = fileStorageProperties;
-    }
+
 
     @PostConstruct
     public void init() throws FileStorageException {
-        this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
+        this.fileStorageLocation = Paths.get(uploadDir)
                 .toAbsolutePath().normalize();
         try {
             Files.createDirectories(fileStorageLocation);
